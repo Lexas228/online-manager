@@ -28,15 +28,15 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
     @Query("select p from PurchaseHistory p where p.user.login = :userLogin")
     List<PurchaseHistory> getAllByUserLogin(@Param(value = "userLogin") String userLogin);
 
-    @Query("select p from PurchaseHistory p where p.product.id = :productId")
+    @Query("select p from PurchaseHistory p where exists (select pr from p.purchasePartHistoryList pr where pr.product.id=:productId)")
     List<PurchaseHistory> getAllByProductId(@Param(value = "productId") Long productId);
 
-    @Query("select p from PurchaseHistory p where p.product.name = :productName")
+    @Query("select p from PurchaseHistory p where exists (select pr from p.purchasePartHistoryList pr where pr.product.name=:productName)")
     List<PurchaseHistory> getAllByProductName(@Param(value = "productName") String productName);
 
-    @Query("select p from PurchaseHistory p where p.product.productType = :productType")
+    @Query("select p from PurchaseHistory p where exists (select pr from p.purchasePartHistoryList pr where pr.product.productType=:productType)")
     List<PurchaseHistory> getAllByProductType(@Param(value = "productType") ProductType productType);
 
-    @Query("select p from PurchaseHistory p where p.product.productType = :productType and p.department.shop.id = :shopId")
+    @Query("select p from PurchaseHistory p where p.department.shop.id = :shopId and exists (select pr from p.purchasePartHistoryList pr where pr.product.productType = :productType)")
     List<PurchaseHistory> getAllByProductTypeAndShopId(@Param(value = "shopId") Long shopId, @Param(value = "productType") ProductType productType);
 }

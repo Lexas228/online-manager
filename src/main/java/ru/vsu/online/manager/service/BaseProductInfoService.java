@@ -14,4 +14,5 @@ public interface BaseProductInfoService {
     List<BaseProductInfo> findAllProductsByType(ProductType productType);
     List<BaseProductInfo> findAllProductsByTypeAndBaseId(ProductType productType, Long baseId);
     BaseProductInfo getById(Long baseProductInfoId);
+    void save(BaseProductInfo baseProductInfo);
 }

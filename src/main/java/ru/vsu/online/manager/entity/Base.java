@@ -16,6 +16,6 @@ public class Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "base")
+    @OneToMany(mappedBy = "base", cascade = CascadeType.ALL)
     private List<BaseProductInfo> baseProductInfos;
 }

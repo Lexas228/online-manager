@@ -163,4 +163,14 @@ public class DepartmentProductInfoServiceImpl implements DepartmentProductInfoSe
     public List<DepProductInfo> getProductWhichNeedToBuyingFromBaseInShopAndAutoBuying(Long shopId, boolean autoBuying) {
         return departmentProductInfoRepository.getAllWhichNeedToBuyInShopWithAutoBuying(shopId, autoBuying);
     }
+
+    @Override
+    public void save(DepProductInfo depProductInfo) {
+        departmentProductInfoRepository.save(depProductInfo);
+    }
+
+    @Override
+    public DepProductInfo getByDepartmentIdAndProductId(Long departmentId, Long productId) {
+        return departmentProductInfoRepository.getByShopIdAndProductId(departmentId, productId).orElse(null);
+    }
 }

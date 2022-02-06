@@ -108,4 +108,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType) {
         return purchaseHistoryService.getAllWhichBuyInShopWithProductType(shopId, productType).stream().map(PurchaseHistory::getUser).collect(Collectors.toList());
     }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
+    }
 }

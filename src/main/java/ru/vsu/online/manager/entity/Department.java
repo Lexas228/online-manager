@@ -1,5 +1,6 @@
 package ru.vsu.online.manager.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,13 +19,14 @@ public class Department {
 
     private DepartmentType departmentType;
 
-    @ManyToOne
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<DepProductInfo> depProductInfos;
 
+    @Column(nullable = false, name = "is_active")
     private boolean isActive; //не будем удалять из базы отдел, если его закроют, просто пометим как неактивный
 
 }

@@ -20,4 +20,5 @@ public interface PurchaseHistoryService {
     List<PurchaseHistory> getAllWhichBuy(ProductType productType);
     List<PurchaseHistory> getAllWhichBuy(String productName);
     List<PurchaseHistory> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType);
+    void save(PurchaseHistory purchaseHistory);
 }

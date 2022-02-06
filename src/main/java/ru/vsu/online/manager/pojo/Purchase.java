@@ -3,6 +3,7 @@ package ru.vsu.online.manager.pojo;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 /*
     Объект, который будет приходит в очередь, с инофрмацией о покупке
@@ -12,6 +13,6 @@ import java.util.List;
 public class Purchase {
     private Long userId;
     private Long departmentId;
-    private List<Integer> productsId;
+    private Map<Long, Long> productsId; //ключ - id товара, значение - кол-во
     private String description;
 }

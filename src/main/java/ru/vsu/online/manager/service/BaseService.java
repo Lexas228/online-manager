@@ -17,4 +17,5 @@ public interface BaseService {
     List<Base> findAllBasesWithProductAndCount(Long productId, Long count);
     List<Base> findAllBasesWithProductAndCount(String productName, Long count);
     List<Base> findAllBasesWithProductAndCount(ProductType productType, Long count);
+    void save(Base base);
 }

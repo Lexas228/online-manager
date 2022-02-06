@@ -59,4 +59,9 @@ public class BaseProductInfoServiceImpl implements BaseProductInfoService {
     public BaseProductInfo getById(Long baseProductInfoId) {
         return baseProductInfoRepository.getById(baseProductInfoId);
     }
+
+    @Override
+    public void save(BaseProductInfo baseProductInfo) {
+        baseProductInfoRepository.save(baseProductInfo);
+    }
 }

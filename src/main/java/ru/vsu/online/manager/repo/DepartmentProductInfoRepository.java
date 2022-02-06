@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import ru.vsu.online.manager.entity.DepProductInfo;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
 Слой обращения к таблице информации о продуктах в отделе
@@ -43,4 +44,7 @@ public interface DepartmentProductInfoRepository extends JpaRepository<DepProduc
             "d.actualCount < d.requiredCount and d.department.shop.id = :shopId and d.isAutoBuying = :autoBuying " +
             "and ((d.isAutoBuying and d.chosenBaseProductInfo is not null) or (d.isAutoBuying <> true))")
     List<DepProductInfo> getAllWhichNeedToBuyInShopWithAutoBuying(@Param(value = "shopId") Long shopId, @Param(value = "autoBuying") boolean autoBuying);
+
+    @Query("select d from DepProductInfo d where d.department.shop.id = :shopId and d.product.id = :productId")
+    Optional<DepProductInfo> getByShopIdAndProductId(@Param(value = "shopId") Long shopId, @Param(value = "productId") Long productId);
 }

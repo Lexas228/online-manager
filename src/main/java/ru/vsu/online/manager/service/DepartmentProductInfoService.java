@@ -20,4 +20,6 @@ public interface DepartmentProductInfoService {
     List<DepProductInfo> getProductWhichNeedToBuyingFromBase();
     List<DepProductInfo> getProductWhichNeedToBuyingFromBaseInDepartmentAndAutoBuying(Long departmentId, boolean AutoBuying);
     List<DepProductInfo> getProductWhichNeedToBuyingFromBaseInShopAndAutoBuying(Long shopId, boolean AutoBuying);
+    DepProductInfo getByDepartmentIdAndProductId(Long departmentId, Long productId);
+    void save(DepProductInfo depProductInfo);
 }

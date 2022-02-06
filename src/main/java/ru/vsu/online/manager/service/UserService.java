@@ -23,4 +23,5 @@ public interface UserService extends UserDetailsService {
     List<User> getAllWhichBuy(ProductType productType);
     List<User> getAllWhichBuy(String productName);
     List<User> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType);
+    void save(User user);
 }

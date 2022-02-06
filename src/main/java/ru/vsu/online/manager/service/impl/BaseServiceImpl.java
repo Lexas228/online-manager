@@ -49,4 +49,9 @@ public class BaseServiceImpl implements BaseService {
     public List<Base> findAllBasesWithProductAndCount(ProductType productType, Long count) {
         return baseRepository.findAllBasesWithProductAndCount(productType, count);
     }
+
+    @Override
+    public void save(Base base) {
+        baseRepository.save(base);
+    }
 }

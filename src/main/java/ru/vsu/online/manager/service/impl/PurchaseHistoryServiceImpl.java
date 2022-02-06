@@ -69,4 +69,9 @@ public class PurchaseHistoryServiceImpl implements PurchaseHistoryService {
     public List<PurchaseHistory> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType) {
         return purchaseHistoryRepository.getAllByProductTypeAndShopId(shopId, productType);
     }
+
+    @Override
+    public void save(PurchaseHistory purchaseHistory) {
+        purchaseHistoryRepository.save(purchaseHistory);
+    }
 }
