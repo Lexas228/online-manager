@@ -17,11 +17,9 @@ public interface UserService extends UserDetailsService {
     List<User> getAllUsersWithPrivilege(String privilegeName);
     List<Role> getRolesByUserId(Long userId);
     List<Role> getRolesByUserLogin(String login);
-    List<Privilege> getPrivilegesByRoleId(Long roleId);
-    List<Privilege> getPrivilegesByRoleName(String roleName);
     List<User> getAllWhichBuy(Long productId);
-    List<User> getAllWhichBuy(ProductType productType);
+    List<User> getAllWhichBuyByProductTypeName(String productTypeName);
     List<User> getAllWhichBuy(String productName);
-    List<User> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType);
+    List<User> getAllWhichBuyInShopWithProductType(Long shopId, String productTypeName);
     void save(User user);
 }

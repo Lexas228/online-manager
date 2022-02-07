@@ -3,7 +3,6 @@ package ru.vsu.online.manager.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.vsu.online.manager.entity.BaseProductInfo;
-import ru.vsu.online.manager.entity.ProductType;
 import ru.vsu.online.manager.repo.BaseProductInfoRepository;
 import ru.vsu.online.manager.service.BaseProductInfoService;
 
@@ -46,22 +45,33 @@ public class BaseProductInfoServiceImpl implements BaseProductInfoService {
     }
 
     @Override
-    public List<BaseProductInfo> findAllProductsByTypeAndBaseId(ProductType productType, Long baseId) {
-        return null;
-    }
-
-    @Override
-    public List<BaseProductInfo> findAllProductsByType(ProductType productType) {
-        return baseProductInfoRepository.findAllByProductType(productType);
-    }
-
-    @Override
     public BaseProductInfo getById(Long baseProductInfoId) {
         return baseProductInfoRepository.getById(baseProductInfoId);
     }
 
+
     @Override
     public void save(BaseProductInfo baseProductInfo) {
         baseProductInfoRepository.save(baseProductInfo);
+    }
+
+    @Override
+    public List<BaseProductInfo> findAllProductsByTypeName(String productTypeName) {
+        return baseProductInfoRepository.findAllByProductTypeName(productTypeName);
+    }
+
+    @Override
+    public List<BaseProductInfo> findAllProductsByTypeId(Long productTypeId) {
+        return baseProductInfoRepository.findAllByProductTypeId(productTypeId);
+    }
+
+    @Override
+    public List<BaseProductInfo> findAllProductsByTypeNameAndBaseId(String productTypeName, Long baseId) {
+        return null;
+    }
+
+    @Override
+    public List<BaseProductInfo> findAllProductsByTypeIdAndBaseId(Long productTypeId, Long baseId) {
+        return null;
     }
 }

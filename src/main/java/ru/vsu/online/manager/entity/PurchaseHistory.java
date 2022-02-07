@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Entity
 @Data
+@Table(name = "purchase_history", schema = "online_manager")
 public class PurchaseHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +24,19 @@ public class PurchaseHistory {
     private User user; //пользователь который совершил покупку
 
     @OneToMany(mappedBy = "purchaseHistory")
-    private List<PurchasePartHistory> purchasePartHistoryList;
+    private List<PurchasePartHistory> purchasePartHistoryList; //разобьем все покупку на несколько частей
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "department_id", nullable = false)
     private Department department; //отдел, в котором он купил
 
+    @Column(name = "total_cost")
     private Double totalCost; //общая цена
 
+    @Column(name = "description")
     private String description; //его описание данной покупки(для разнообразия - по типу рейтинга)
 
     @CreatedDate
+    @Column(name = "date")
     private LocalDate date;//дата покупки
 }

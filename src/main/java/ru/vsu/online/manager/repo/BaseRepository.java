@@ -21,12 +21,12 @@ public interface BaseRepository extends JpaRepository<Base, Long> {
     @Query("select b from Base b where exists (select s from b.baseProductInfos s where s.product.name=:productName)")
     List<Base> findAllBasesWithProduct(@Param(value = "productName") String productName);
 
-    @Query("select b from Base b where exists (select s from b.baseProductInfos s where s.product.productType=:productType)")
-    List<Base> findAllBasesWithProduct(@Param(value = "productType")ProductType productType);
+    @Query("select b from Base b where exists (select s from b.baseProductInfos s where s.product.productType.name=:productType)")
+    List<Base> findAllBasesWithProductTypeName(@Param(value = "productType")String productTypeName);
 
     @Query("select b from Base b where exists " +
-            "(select s from b.baseProductInfos s where s.product.productType=:productType and s.count >= :count)")
-    List<Base> findAllBasesWithProductAndCount(@Param(value = "productType")ProductType productType, @Param(value = "count") Long count);
+            "(select s from b.baseProductInfos s where s.product.productType.name=:productType and s.count >= :count)")
+    List<Base> findAllBasesWithProductTypeNameAndCount(@Param(value = "productType")String productTypeName, @Param(value = "count") Long count);
 
     @Query("select b from Base b where exists " +
             "(select s from b.baseProductInfos s where s.product.id=:productId and s.count >= :count)")

@@ -27,8 +27,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department findDepartment(Long shopId, DepartmentType departmentType) {
-        return departmentRepository.findByShopIdAndDepartmentType(shopId, departmentType).orElse(null);
+    public Department findDepartment(Long shopId, String departmentTypeName) {
+        return departmentRepository.findByShopIdAndDepartmentTypeName(shopId, departmentTypeName).orElse(null);
     }
 
     @Override

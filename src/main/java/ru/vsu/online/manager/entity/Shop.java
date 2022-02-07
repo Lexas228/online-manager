@@ -10,6 +10,7 @@ import java.util.List;
  */
 @Entity
 @Data
+@Table(name = "shop", schema = "online_manager")
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

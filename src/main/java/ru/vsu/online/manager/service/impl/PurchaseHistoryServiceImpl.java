@@ -56,8 +56,8 @@ public class PurchaseHistoryServiceImpl implements PurchaseHistoryService {
     }
 
     @Override
-    public List<PurchaseHistory> getAllWhichBuy(ProductType productType) {
-        return purchaseHistoryRepository.getAllByProductType(productType);
+    public List<PurchaseHistory> getAllWhichBuyByProductTypeName(String productTypeName) {
+        return purchaseHistoryRepository.getAllByProductType(productTypeName);
     }
 
     @Override
@@ -66,8 +66,8 @@ public class PurchaseHistoryServiceImpl implements PurchaseHistoryService {
     }
 
     @Override
-    public List<PurchaseHistory> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType) {
-        return purchaseHistoryRepository.getAllByProductTypeAndShopId(shopId, productType);
+    public List<PurchaseHistory> getAllWhichBuyInShopWithProductType(Long shopId, String productTypeName) {
+        return purchaseHistoryRepository.getAllByProductTypeAndShopId(shopId, productTypeName);
     }
 
     @Override

@@ -3,8 +3,6 @@ package ru.vsu.online.manager.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.vsu.online.manager.entity.Base;
-import ru.vsu.online.manager.entity.BaseProductInfo;
-import ru.vsu.online.manager.entity.ProductType;
 import ru.vsu.online.manager.repo.BaseRepository;
 import ru.vsu.online.manager.service.BaseService;
 
@@ -31,8 +29,8 @@ public class BaseServiceImpl implements BaseService {
     }
 
     @Override
-    public List<Base> findAllBasesWithProduct(ProductType productType) {
-        return baseRepository.findAllBasesWithProduct(productType);
+    public List<Base> findAllBasesWithProductTypeName(String productTypeName) {
+        return baseRepository.findAllBasesWithProductTypeName(productTypeName);
     }
 
     @Override
@@ -46,8 +44,8 @@ public class BaseServiceImpl implements BaseService {
     }
 
     @Override
-    public List<Base> findAllBasesWithProductAndCount(ProductType productType, Long count) {
-        return baseRepository.findAllBasesWithProductAndCount(productType, count);
+    public List<Base> findAllBasesWithProductTypeNameAndCount(String productTypeName, Long count) {
+        return baseRepository.findAllBasesWithProductTypeNameAndCount(productTypeName, count);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.vsu.online.manager.entity.*;
 import ru.vsu.online.manager.pojo.Purchase;
 import ru.vsu.online.manager.repo.DepartmentRepository;
+import ru.vsu.online.manager.repo.DepartmentTypeRepository;
 import ru.vsu.online.manager.repo.ProductRepository;
 import ru.vsu.online.manager.repo.ShopRepository;
 import ru.vsu.online.manager.service.*;
@@ -12,6 +13,7 @@ import ru.vsu.online.manager.service.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +26,7 @@ public class ShopServiceImpl implements ShopService {
     private final DepartmentProductInfoService departmentProductInfoService;
     private final UserService userService;
     private final ProductRepository productRepository;
+    private final DepartmentTypeRepository departmentTypeRepository;
 
     @Override
     public void doPurchase(Purchase purchase) {
@@ -64,8 +67,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void closeDepartment(Long shopId, DepartmentType departmentType) {
-        Department department = departmentService.findDepartment(shopId, departmentType);
+    public void closeDepartment(Long shopId, String departmentTypeName) {
+        Department department = departmentService.findDepartment(shopId, departmentTypeName);
         if(department != null){
             department.setActive(false);
             departmentService.save(department);
@@ -88,9 +91,12 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional
-    public void openNewDepartment(Long shopId, DepartmentType departmentType, boolean closeOldDepartment) {
-        Department department = departmentService.findDepartment(shopId, departmentType);
-        if(department == null || closeOldDepartment){
+    public void openNewDepartment(Long shopId, String departmentTypeName, boolean closeOldDepartment) {
+        Department department = departmentService.findDepartment(shopId, departmentTypeName);
+        Optional<DepartmentType> departmentType = departmentTypeRepository.findByName(departmentTypeName);
+
+        if((department == null || closeOldDepartment) && departmentType.isPresent()){
+            DepartmentType departmentType1 = departmentType.get();
             if(department != null){
                 department.setActive(false);
                 departmentService.save(department);
@@ -101,7 +107,7 @@ public class ShopServiceImpl implements ShopService {
                 Department newOne = new Department();
                 newOne.setActive(true);
                 newOne.setShop(shop);
-                newOne.setDepartmentType(departmentType);
+                newOne.setDepartmentType(departmentType1);
                 departmentRepository.save(newOne);
                 if(department != null){
                     department.getDepProductInfos().forEach(depProductInfo -> {

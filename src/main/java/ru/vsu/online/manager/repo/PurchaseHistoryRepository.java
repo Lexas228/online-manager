@@ -34,9 +34,9 @@ public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory
     @Query("select p from PurchaseHistory p where exists (select pr from p.purchasePartHistoryList pr where pr.product.name=:productName)")
     List<PurchaseHistory> getAllByProductName(@Param(value = "productName") String productName);
 
-    @Query("select p from PurchaseHistory p where exists (select pr from p.purchasePartHistoryList pr where pr.product.productType=:productType)")
-    List<PurchaseHistory> getAllByProductType(@Param(value = "productType") ProductType productType);
+    @Query("select p from PurchaseHistory p where exists (select pr from p.purchasePartHistoryList pr where pr.product.productType.name=:productType)")
+    List<PurchaseHistory> getAllByProductType(@Param(value = "productType") String productType);
 
-    @Query("select p from PurchaseHistory p where p.department.shop.id = :shopId and exists (select pr from p.purchasePartHistoryList pr where pr.product.productType = :productType)")
-    List<PurchaseHistory> getAllByProductTypeAndShopId(@Param(value = "shopId") Long shopId, @Param(value = "productType") ProductType productType);
+    @Query("select p from PurchaseHistory p where p.department.shop.id = :shopId and exists (select pr from p.purchasePartHistoryList pr where pr.product.productType.name = :productType)")
+    List<PurchaseHistory> getAllByProductTypeAndShopId(@Param(value = "shopId") Long shopId, @Param(value = "productType") String productType);
 }

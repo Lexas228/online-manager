@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface DepartmentService {
     void buyAllAutoBuyingProducts(Long departmentId);
-    Department findDepartment(Long shopId, DepartmentType departmentType);
+    Department findDepartment(Long shopId, String departmentTypeName);
     Department findDepartment(Long departmentId);
     void save(Department department);
 }

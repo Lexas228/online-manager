@@ -3,6 +3,7 @@ package ru.vsu.online.manager.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -10,6 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Data
+@Table(name = "role", schema = "online_manager")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +20,9 @@ public class Role {
     @Column(unique = true, name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<Privilege> privileges;
-
     @ManyToMany
     @JoinTable(joinColumns = {@JoinColumn(name = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")},
             name = "user_roles")
-    private Set<User> users;
+    private List<User> users;
 }

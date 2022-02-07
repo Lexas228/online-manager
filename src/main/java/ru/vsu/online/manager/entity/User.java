@@ -3,6 +3,7 @@ package ru.vsu.online.manager.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -10,7 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "user", schema = "online_manager")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +23,5 @@ public class User {
     private String password;
 
     @ManyToMany(mappedBy = "users")
-    private Set<Role> roles;
+    private List<Role> roles;
 }

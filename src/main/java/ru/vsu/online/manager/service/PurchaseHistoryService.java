@@ -17,8 +17,8 @@ public interface PurchaseHistoryService {
     List<PurchaseHistory> getAllPurchasesByUserId(Long id);
     List<PurchaseHistory> getAllPurchasesByUserLogin(String login);
     List<PurchaseHistory> getAllWhichBuy(Long productId);
-    List<PurchaseHistory> getAllWhichBuy(ProductType productType);
+    List<PurchaseHistory> getAllWhichBuyByProductTypeName(String productTypeName);
     List<PurchaseHistory> getAllWhichBuy(String productName);
-    List<PurchaseHistory> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType);
+    List<PurchaseHistory> getAllWhichBuyInShopWithProductType(Long shopId, String productTypeName);
     void save(PurchaseHistory purchaseHistory);
 }

@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
         User user = this.getByLogin(username);
         if(user != null){
             List<GrantedAuthority> grantedAuthorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-            user.getRoles().forEach(role -> role.getPrivileges().stream().map(privilege -> new SimpleGrantedAuthority(privilege.getName())).forEach(grantedAuthorities::add));
             return new org.springframework.security.core.userdetails.User(username, user.getPassword(), grantedAuthorities);
         }
         throw new UsernameNotFoundException("Username " + username + " was not found in database");
@@ -74,16 +73,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Privilege> getPrivilegesByRoleId(Long roleId) {
-        return null;
-    }
-
-    @Override
-    public List<Privilege> getPrivilegesByRoleName(String roleName) {
-        return null;
-    }
-
-    @Override
     public boolean isHasByLogin(String login) {
         return getByLogin(login) != null;
     }
@@ -95,8 +84,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllWhichBuy(ProductType productType) {
-        return purchaseHistoryService.getAllWhichBuy(productType).stream().map(PurchaseHistory::getUser).collect(Collectors.toList());
+    public List<User> getAllWhichBuyByProductTypeName(String productTypeName) {
+        return purchaseHistoryService.getAllWhichBuy(productTypeName).stream().map(PurchaseHistory::getUser).collect(Collectors.toList());
     }
 
     @Override
@@ -105,8 +94,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllWhichBuyInShopWithProductType(Long shopId, ProductType productType) {
-        return purchaseHistoryService.getAllWhichBuyInShopWithProductType(shopId, productType).stream().map(PurchaseHistory::getUser).collect(Collectors.toList());
+    public List<User> getAllWhichBuyInShopWithProductType(Long shopId, String productTypeName) {
+        return purchaseHistoryService.getAllWhichBuyInShopWithProductType(shopId, productTypeName).stream().map(PurchaseHistory::getUser).collect(Collectors.toList());
     }
 
     @Override

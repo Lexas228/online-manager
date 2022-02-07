@@ -11,8 +11,10 @@ public interface BaseProductInfoService {
     void putSomeProducts(Long baseProductInfoId, Long count);
     void takeSomeProducts(Long baseProductInfoId, Long count);
     List<BaseProductInfo> findAllByBaseId(Long baseId);
-    List<BaseProductInfo> findAllProductsByType(ProductType productType);
-    List<BaseProductInfo> findAllProductsByTypeAndBaseId(ProductType productType, Long baseId);
+    List<BaseProductInfo> findAllProductsByTypeName(String productTypeName);
+    List<BaseProductInfo> findAllProductsByTypeId(Long productTypeId);
+    List<BaseProductInfo> findAllProductsByTypeNameAndBaseId(String productTypeName, Long baseId);
+    List<BaseProductInfo> findAllProductsByTypeIdAndBaseId(Long productTypeId, Long baseId);
     BaseProductInfo getById(Long baseProductInfoId);
     void save(BaseProductInfo baseProductInfo);
 }

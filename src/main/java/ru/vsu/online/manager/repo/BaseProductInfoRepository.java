@@ -15,8 +15,11 @@ public interface BaseProductInfoRepository extends JpaRepository<BaseProductInfo
     @Query("select p from BaseProductInfo p where p.base.id = :baseId")
     List<BaseProductInfo> findAllByBaseId(@Param(value = "baseId") Long baseId);
 
-    @Query("select p from BaseProductInfo p where p.product.productType = :productType")
-    List<BaseProductInfo> findAllByProductType(@Param(value = "productType") ProductType productType);
+    @Query("select p from BaseProductInfo p where p.product.productType.name = :productType")
+    List<BaseProductInfo> findAllByProductTypeName(@Param(value = "productType") String productTypeName);
+
+    @Query("select p from BaseProductInfo p where p.product.productType.id = :productType")
+    List<BaseProductInfo> findAllByProductTypeId(@Param(value = "productType") Long productTypeId);
 
     @Query("select p from BaseProductInfo p where p.product.productType = :productType and p.base.id = :baseId")
     List<BaseProductInfo> findAllByProductTypeAndBaseId(@Param(value = "productType") ProductType productType, @Param(value = "baseId") Long baseId);
