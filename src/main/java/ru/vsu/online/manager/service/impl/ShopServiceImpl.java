@@ -25,7 +25,7 @@ public class ShopServiceImpl implements ShopService {
     private final DepartmentService departmentService;
     private final DepartmentProductInfoService departmentProductInfoService;
     private final UserService userService;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
     private final DepartmentTypeRepository departmentTypeRepository;
 
     @Override
@@ -91,15 +91,14 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional
-    public void openNewDepartment(Long shopId, String departmentTypeName, boolean closeOldDepartment) {
+    public void openNewDepartment(Long shopId, String departmentTypeName) {
         Department department = departmentService.findDepartment(shopId, departmentTypeName);
-        Optional<DepartmentType> departmentType = departmentTypeRepository.findByName(departmentTypeName);
+        Optional<DepartmentType> departmentTypeOptional = departmentTypeRepository.findByName(departmentTypeName);
 
-        if((department == null || closeOldDepartment) && departmentType.isPresent()){
-            DepartmentType departmentType1 = departmentType.get();
+        if(departmentTypeOptional.isPresent()){
+            DepartmentType departmentType = departmentTypeOptional.get();
             if(department != null){
                 department.setActive(false);
-                departmentService.save(department);
             }
 
             Shop shop = getShopById(shopId);
@@ -107,15 +106,26 @@ public class ShopServiceImpl implements ShopService {
                 Department newOne = new Department();
                 newOne.setActive(true);
                 newOne.setShop(shop);
-                newOne.setDepartmentType(departmentType1);
+                newOne.setDepartmentType(departmentType);
+                newOne.setDepProductInfos(new ArrayList<>());
                 departmentRepository.save(newOne);
                 if(department != null){
                     department.getDepProductInfos().forEach(depProductInfo -> {
-                        transferProduct(department.getId(), newOne.getId(), depProductInfo.getActualCount());
+                        transferProduct(department.getId(), newOne.getId(), depProductInfo.getId());
+                    });
+                }else{
+                    departmentType.getProductTypeList().forEach(productType -> {
+                        productService.getAllProductsByProductType(productType).forEach(product -> {
+                            DepProductInfo depProductInfo = new DepProductInfo();
+                            depProductInfo.setProduct(product);
+
+                        });
                     });
                 }
             }
         }
+        if(department != null)
+            departmentService.save(department);
     }
 
     @Override

@@ -173,4 +173,9 @@ public class DepartmentProductInfoServiceImpl implements DepartmentProductInfoSe
     public DepProductInfo getByDepartmentIdAndProductId(Long departmentId, Long productId) {
         return departmentProductInfoRepository.getByShopIdAndProductId(departmentId, productId).orElse(null);
     }
+
+    @Override
+    public void transferProduct(Long departmentProductIdFrom, Long departmentProductIdTo, Long count) {
+
+    }
 }

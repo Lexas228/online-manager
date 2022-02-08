@@ -21,5 +21,6 @@ public interface DepartmentProductInfoService {
     List<DepProductInfo> getProductWhichNeedToBuyingFromBaseInDepartmentAndAutoBuying(Long departmentId, boolean AutoBuying);
     List<DepProductInfo> getProductWhichNeedToBuyingFromBaseInShopAndAutoBuying(Long shopId, boolean AutoBuying);
     DepProductInfo getByDepartmentIdAndProductId(Long departmentId, Long productId);
+    void transferProduct(Long departmentProductIdFrom, Long departmentProductIdTo, Long count);
     void save(DepProductInfo depProductInfo);
 }

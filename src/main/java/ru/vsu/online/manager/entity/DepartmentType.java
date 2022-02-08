@@ -2,6 +2,7 @@ package ru.vsu.online.manager.entity;
 
 
 import liquibase.pro.packaged.E;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "department_type", schema = "online_manager")
+@Data
 public class DepartmentType {
     @Id
     private Long id;
@@ -21,6 +23,6 @@ public class DepartmentType {
     @OneToMany(mappedBy = "productType", cascade = CascadeType.ALL)
     private List<ProductType> productTypeList; //связь один ко многим(например мясной отдел будет хранить колбасу, мясо, курицу)
 
-    @OneToMany(mappedBy = "department_type")
+    @OneToMany(mappedBy = "department_type", cascade = CascadeType.ALL)
     private List<Department> departments; //на всякий случай свяжем с двух сторон, может быть так удобнее будет что то доставать
 }

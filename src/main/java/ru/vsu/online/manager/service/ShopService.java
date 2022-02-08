@@ -12,7 +12,7 @@ public interface ShopService {
     void closeDepartment(Long departmentId);
     void closeDepartment(Long shopId, String departmentTypeName);
     void transferProduct(Long departmentIdFrom, Long departmentIdTo, Long departmentProductInfoId);
-    void openNewDepartment(Long shopId, String departmentTypeName, boolean closeOldDepartment);
+    void openNewDepartment(Long shopId, String departmentTypeName);
     List<Shop> getAllShops();
     Shop getShopById(Long id);
     Shop getShopByDepartmentId(Long departmentId);
