@@ -20,7 +20,6 @@ public class User {
     @Column(unique = true, name = "name")
     private String login;
 
-    private String password;
 
     @ManyToMany(mappedBy = "users")
     private List<Role> roles;
